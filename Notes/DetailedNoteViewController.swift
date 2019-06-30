@@ -63,4 +63,6 @@ class DetailedNoteViewController: UIViewController, NotesListViewControllerDeleg
             imageView.isHidden = true
         }
     }
+    
+    // Add some new comment
 }

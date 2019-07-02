@@ -143,6 +143,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="sMu-Ge-Y0r">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="7ph-No-mKj">
+                            <connections>
+                                <action selector="editAction:" destination="WbN-Qs-9C3" id="HZU-mJ-i1o"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="jCi-j8-2RS">
                             <connections>
                                 <action selector="addAction" destination="WbN-Qs-9C3" id="zeh-NH-2Hj"/>
@@ -322,7 +327,7 @@
             </objects>
             <point key="canvasLocation" x="990" y="-90"/>
         </scene>
-        <!--Detailed Note View Controller-->
+        <!--DetailedNote-->
         <scene sceneID="JpI-IB-AHH">
             <objects>
                 <viewController storyboardIdentifier="DetailedNoteViewController" id="esg-q8-NYO" customClass="DetailedNoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
@@ -331,10 +336,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-G3-Uy6">
-                                <rect key="frame" x="30" y="74" width="354" height="758"/>
+                                <rect key="frame" x="30" y="94" width="354" height="689"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVb-9K-RsW">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="758"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="689"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillProportionally" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="djV-Ka-TkN">
                                                 <rect key="frame" x="8" y="8" width="338" height="378.5"/>
@@ -428,12 +433,21 @@
                         <color key="backgroundColor" red="1" green="0.99520794930000001" blue="0.93923465220000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="CvU-G3-Uy6" firstAttribute="leading" secondItem="W0Z-32-hPu" secondAttribute="leading" constant="30" id="29w-m3-TPN"/>
-                            <constraint firstItem="CvU-G3-Uy6" firstAttribute="top" secondItem="W0Z-32-hPu" secondAttribute="top" constant="30" id="DNA-PC-1N0"/>
                             <constraint firstItem="W0Z-32-hPu" firstAttribute="bottom" secondItem="CvU-G3-Uy6" secondAttribute="bottom" constant="30" id="Nx5-Pr-4Pa"/>
+                            <constraint firstItem="CvU-G3-Uy6" firstAttribute="top" secondItem="W0Z-32-hPu" secondAttribute="top" constant="50" id="ddS-Sv-A0t"/>
                             <constraint firstItem="W0Z-32-hPu" firstAttribute="trailing" secondItem="CvU-G3-Uy6" secondAttribute="trailing" constant="30" id="mrj-va-sbi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="W0Z-32-hPu"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="DetailedNote" leftItemsSupplementBackButton="YES" id="BXa-It-zqm">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="m9o-7t-2tz">
+                            <connections>
+                                <action selector="editTapped:" destination="esg-q8-NYO" id="5e9-Yj-Aci"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dateLabel" destination="cbl-Zn-PlH" id="JBR-wJ-Kyx"/>
                         <outlet property="descriptionLabel" destination="YfX-Ao-X6r" id="k2i-Cg-D8y"/>
@@ -445,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuU-Ma-Val" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="989.85507246376824" y="609.375"/>
+            <point key="canvasLocation" x="990" y="584"/>
         </scene>
     </scenes>
 </document>

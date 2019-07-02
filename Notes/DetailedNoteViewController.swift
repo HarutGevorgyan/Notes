@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MessageUI
 
 
-class DetailedNoteViewController: UIViewController, NotesListViewControllerDelegate {
+class DetailedNoteViewController: UIViewController, MFMailComposeViewControllerDelegate { //, NotesListViewControllerDelegate {
     
     var selectedNote: Note?
     
@@ -20,18 +21,33 @@ class DetailedNoteViewController: UIViewController, NotesListViewControllerDeleg
     @IBOutlet weak var phoneNumber: UIButton!
     @IBOutlet weak var email: UIButton!
     
+    @IBAction func editTapped(_ sender: UIBarButtonItem) {
+        
+    }
+    
     
     @IBAction func phoneNumberTapped(_ sender: UIButton) {
-        
+        guard let phoneNum = sender.titleLabel?.text else { return }
+        guard let number = URL(string: "tel://" + phoneNum) else { return }
+        UIApplication.shared.open(number)
     }
     
     @IBAction func emailButtonTapped(_ sender: UIButton) {
+        guard MFMailComposeViewController.canSendMail() else {
+            print("Can not send email")
+            return
+        }
         
-    }
-    
-    
-    @IBAction func notesItemTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        guard let mail = sender.titleLabel?.text else { return }
+        
+        let mailComposer = MFMailComposeViewController()
+        mailComposer.mailComposeDelegate = self
+        
+        mailComposer.setSubject("initial mail")
+        mailComposer.setToRecipients([mail])
+        mailComposer.setMessageBody("Hello, this message was sent from the iPhone", isHTML: false)
+        
+        present(mailComposer, animated: true, completion: nil)
     }
     
     
@@ -48,7 +64,6 @@ class DetailedNoteViewController: UIViewController, NotesListViewControllerDeleg
     }
     
     func setup() {
-
         guard let note = selectedNote else { return }
         
         titleLabel.text = note.title
@@ -64,5 +79,5 @@ class DetailedNoteViewController: UIViewController, NotesListViewControllerDeleg
         }
     }
     
-    // Add some new comment
+    
 }

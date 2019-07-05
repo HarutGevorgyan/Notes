@@ -2,8 +2,8 @@
 //  NoteTableViewCell.swift
 //  Notes
 //
-//  Created by Arthur Hakobyan on 6/23/19.
-//  Copyright © 2019 Arhur Hakobyan. All rights reserved.
+//  Created by Harut on 6/23/19.
+//  Copyright © 2019 Harutyun Gevorgyan. All rights reserved.
 //
 
 import UIKit

@@ -2,19 +2,16 @@
 //  NotesListViewController.swift
 //  Notes
 //
-//  Created by Arthur Hakobyan on 6/23/19.
-//  Copyright © 2019 Arhur Hakobyan. All rights reserved.
+//  Created by Harut on 6/23/19.
+//  Copyright © 2019 Harutyun Gevorgyan. All rights reserved.
 //
 
 import UIKit
 
-//protocol NotesListViewControllerDelegate: class {
-//    func selectedNote(note: Note)
-//}
 
 class NotesListViewController: UITableViewController, AddNoteViewControllerDelegate {
     
-//    weak var delegate: NotesListViewControllerDelegate?
+    @IBOutlet weak var editBarItem: UIBarButtonItem!
     
     private var notes = [Note]()
     
@@ -29,7 +26,12 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
         guard let addViewController = self.storyboard?.instantiateViewController(withIdentifier: "AddNoteViewController") as? AddNoteViewController else { return }
         addViewController.delegate = self
         let navVC = UINavigationController(rootViewController: addViewController)
+        
         present(navVC, animated: true, completion: nil)
+        if isEditing {
+            isEditing = !isEditing
+            editBarItem.title = "Edit"
+        }
     }
     
     
@@ -64,9 +66,7 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let detailedNoteViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailedNoteViewController") as? DetailedNoteViewController else { return }
-//        delegate = detailedNoteViewController
-//        delegate?.selectedNote(note: notes[indexPath.row])
+        guard let detailedNoteViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailedAndEditViewController") as? DetailedAndEditViewController else { return }
         
         detailedNoteViewController.selectedNote = notes[indexPath.row]
         
@@ -97,6 +97,4 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
         notes.insert(movedNote, at: destinationIndexPath.row)
         tableView.reloadData()
     }
-    
-    
 }

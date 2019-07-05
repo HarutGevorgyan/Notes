@@ -3,7 +3,7 @@
 //  Notes
 //
 //  Created by Harut on 30/06/2019.
-//  Copyright © 2019 Arhur Hakobyan. All rights reserved.
+//  Copyright © 2019 Harutyun Gevorgyan. All rights reserved.
 //
 
 import UIKit

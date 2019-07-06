@@ -79,6 +79,7 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
         guard let detailedNoteViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController else { return }
         
         detailedNoteViewController.selectedNote = notes[indexPath.row]
+        detailedNoteViewController.delegate = self
         
         navigationController?.pushViewController(detailedNoteViewController, animated: true)
     }

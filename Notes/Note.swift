@@ -15,13 +15,15 @@ struct Note {
     var email: String
     var image: UIImage?
     var date: Date
+    var id: Int
     
-    init(title: String, description: String, phone: String, email: String, date: Date, image: UIImage? = nil) {
+    init(title: String, description: String, phone: String, email: String, date: Date, id: Int, image: UIImage? = nil) {
         self.title = title
         self.description = description
         self.phone = phone
         self.email = email
         self.date = date
+        self.id = id
         self.image = image
     }
 }

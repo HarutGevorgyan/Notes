@@ -9,11 +9,12 @@
 import UIKit
 
 
-class NotesListViewController: UITableViewController, AddNoteViewControllerDelegate {
+class NotesListViewController: UITableViewController, AddNoteViewControllerDelegate, DetailedViewControllerDelegate {
+    
     
     @IBOutlet weak var editBarItem: UIBarButtonItem!
     
-    private var notes = [Note]()
+    internal var notes = [Note]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,8 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
         }
     }
     
+    
+    // textshouldchangecharactersinrange -> bool
     
     @IBAction func editAction(_ sender: UIBarButtonItem) {
         isEditing = !isEditing
@@ -65,8 +68,15 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
         tableView.reloadData()
     }
     
+    // implementation of DetailedViewControllerDelegate
+    func updateNotes(with: Note) {
+        guard let index = notes.firstIndex(where: {$0.id == with.id}) else { return }
+        notes[index] = with
+        tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let detailedNoteViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailedAndEditViewController") as? DetailedAndEditViewController else { return }
+        guard let detailedNoteViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController else { return }
         
         detailedNoteViewController.selectedNote = notes[indexPath.row]
         

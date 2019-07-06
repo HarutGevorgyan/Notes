@@ -11,6 +11,7 @@ import AVKit
 
 protocol AddNoteViewControllerDelegate: class {
     func noteCreated(note: Note)
+    var notes: [Note] { get set }
 }
 
 class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -26,8 +27,6 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var datePicker: UIDatePicker!
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.minimumDate = Date()
@@ -36,7 +35,7 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
         imageSelectButton.layer.borderWidth = 0.5
         imageSelectButton.layer.borderColor = UIColor.blue.cgColor
         imageSelectButton.setTitleColor(.blue, for: .normal)
-
+        
         descriptionTextView.layer.cornerRadius = 6.0
         descriptionTextView.layer.borderWidth = 0.5
         descriptionTextView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor
@@ -47,12 +46,19 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction private func saveAction() {
-        if let title = titleField.text, let phone = phoneTextField.text, let email = emailTextField.text, let description = descriptionTextView.text {
+        if let title = titleField.text,  let description = descriptionTextView.text, let phone = phoneTextField.text, let email = emailTextField.text {
             
-            let note = Note(title: title, description: description, phone: phone, email: email, date: datePicker.date, image: imageView.image)
-            
-            delegate?.noteCreated(note: note)
-            navigationController?.dismiss(animated: true, completion: nil)
+            if !title.isEmpty && !description.isEmpty && !phone.isEmpty && !email.isEmpty  {
+                let newNoteID = delegate!.notes.isEmpty ? 1 : (delegate?.notes.last?.id)! + 1
+                let note = Note(title: title, description: description, phone: phone, email: email, date: datePicker.date, id: newNoteID,  image: imageView.image)
+                delegate?.noteCreated(note: note)
+                navigationController?.dismiss(animated: true, completion: nil)
+            } else {
+                let alertcontroller = UIAlertController(title: "Insuficcient information", message: "You should fill Title, Description, Phone and Email fields", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertcontroller.addAction(okAction)
+                present(alertcontroller, animated: true)
+            }
         }
     }
     

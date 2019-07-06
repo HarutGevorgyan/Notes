@@ -34,16 +34,29 @@ class DetailedViewController: UIViewController, UINavigationControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateAndSetViewInReadOnlyMode()
-        titleTextField.borderStyle = .none
-        descriptionTextField.borderStyle = .none
+        updateAndSetViewToReadOnlyMode()
         chooseImageButtonOutlet.layer.borderColor = UIColor.gray.cgColor
         chooseImageButtonOutlet.layer.cornerRadius = 6
         chooseImageButtonOutlet.layer.borderWidth = 0.5
     }
     
     
-    func updateAndSetViewInReadOnlyMode() {
+    @IBAction func editBarItemTapped(_ sender: UIBarButtonItem) {
+        let viewIsInEditModeWhenButtonTapped = titleTextField.isUserInteractionEnabled
+        
+        if viewIsInEditModeWhenButtonTapped {
+            updateSelectedNote()
+            delegate?.updateNotes(with: selectedNote!)
+            updateAndSetViewToReadOnlyMode()
+            sender.title = "Edit"
+        } else {
+            turnOnEditigMode()
+            sender.title = "Save"
+        }
+    }
+    
+    
+    func updateAndSetViewToReadOnlyMode() {
         titleTextField.text = selectedNote?.title
         titleTextField.isUserInteractionEnabled = false
         titleTextField.borderStyle = .none
@@ -81,29 +94,13 @@ class DetailedViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     
-    func updateChangesInSelectedNote() {
+    func updateSelectedNote() {
         selectedNote?.title = titleTextField.text!
         selectedNote?.description = descriptionTextField.text!
         selectedNote?.email = emailTextField.text!
         selectedNote?.phone = phoneNumberTextField.text!
         selectedNote?.date = datePicker.date
         selectedNote?.image = imageView.image
-    }
-    
-    
-    
-    
-    @IBAction func editBarItemTapped(_ sender: UIBarButtonItem) {
-        let viewIsInEditModeWhenButtonTapped = titleTextField.isUserInteractionEnabled
-        
-        if viewIsInEditModeWhenButtonTapped {
-            sender.title = "Edit"
-        } else {
-            sender.title = "Save"
-            turnOnEditigMode()
-        }
-        
-        delegate?.updateNotes(with: selectedNote!)
     }
     
     

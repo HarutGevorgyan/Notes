@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = 6.0
     }
     
+    // TODO: Add SignUp option, Add saving oin memory option, update loginScreen UI
+    
     @IBAction private func loginAction() {
         guard let notesViewController = self.storyboard?.instantiateViewController(withIdentifier: "NotesListViewController") as? NotesListViewController else { return }
         let navVC = UINavigationController(rootViewController: notesViewController)

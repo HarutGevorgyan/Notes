@@ -16,6 +16,8 @@ protocol AddNoteViewControllerDelegate: class {
 
 class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    // TODO: Save notes in memory
+    
     weak var delegate: AddNoteViewControllerDelegate?
     
     @IBOutlet private weak var titleField: UITextField!
@@ -30,6 +32,7 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.minimumDate = Date()
+        
 
         imageSelectButton.layer.cornerRadius = 6.0
         imageSelectButton.layer.borderWidth = 0.5
@@ -51,6 +54,9 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
             if !title.isEmpty && !description.isEmpty && !phone.isEmpty && !email.isEmpty  {
                 let newNoteID = delegate!.notes.isEmpty ? 1 : (delegate?.notes.last?.id)! + 1
                 let note = Note(title: title, description: description, phone: phone, email: email, date: datePicker.date, id: newNoteID,  image: imageView.image)
+                
+                // TODO: checks for email and phoneNumber
+                
                 delegate?.noteCreated(note: note)
                 navigationController?.dismiss(animated: true, completion: nil)
             } else {
@@ -64,20 +70,6 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBAction private func imageSelectAction() {
         openImagePicker()
-//        let videoStatus = AVCaptureDevice.authorizationStatus(for: .video)
-//        if videoStatus == .notDetermined {
-//            AVCaptureDevice.requestAccess(for: .video) { response in
-//                if response {
-//                    self.openImagePicker()
-//                } else {
-//                    // TODO: (Arthur) Show alert
-//                }
-//            }
-//        } else if videoStatus == .authorized {
-//            openImagePicker()
-//        } else {
-//            // TODO: (Arthur) Show alert
-//        }
     }
     
     func openImagePicker() {
@@ -92,5 +84,17 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
             imageView.image = image
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+
+
+extension AddNoteViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard let text = textField.text else { return true }
+        let newLength = text.count + string.count - range.length
+        return newLength <= 10
     }
 }

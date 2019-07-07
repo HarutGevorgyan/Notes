@@ -14,6 +14,7 @@ class NoteTableViewCell: UITableViewCell {
     @IBOutlet private weak var noteImageView: UIImageView?
     @IBOutlet weak var dateLabel: UILabel!
     
+    // TODO: use DateFormatter for dateLabel.text
 
     func setup(with note: Note) {
         titleLabel.text = note.title

@@ -70,10 +70,10 @@
 				E0660C4D22BF7D490054FFC2 /* NoteTableViewCell.swift */,
 				E0660C4B22BF7BA30054FFC2 /* AddNoteViewController.swift */,
 				E0660C4922BF7B8F0054FFC2 /* NotesListViewController.swift */,
+				E0660C3E22BF7B290054FFC2 /* LaunchScreen.storyboard */,
 				25402FA922CBAFF200874F17 /* DetailedViewController.swift */,
 				E0660C3922BF7B280054FFC2 /* Main.storyboard */,
 				E0660C3C22BF7B290054FFC2 /* Assets.xcassets */,
-				E0660C3E22BF7B290054FFC2 /* LaunchScreen.storyboard */,
 				E0660C4122BF7B290054FFC2 /* Info.plist */,
 			);
 			path = Notes;

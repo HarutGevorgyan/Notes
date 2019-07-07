@@ -11,7 +11,6 @@ import UIKit
 
 class NotesListViewController: UITableViewController, AddNoteViewControllerDelegate, DetailedViewControllerDelegate {
     
-    
     @IBOutlet weak var editBarItem: UIBarButtonItem!
     
     internal var notes = [Note]()
@@ -62,6 +61,9 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
         return cell
     }
     
+    
+    // TODO: Save notes in memory
+    
     // MARK: - AddNoteViewControllerDelegate
     func noteCreated(note: Note) {
         notes.append(note)
@@ -75,7 +77,9 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
         tableView.reloadData()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        print("Tapped accessory button")
         guard let detailedNoteViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController else { return }
         
         detailedNoteViewController.selectedNote = notes[indexPath.row]
@@ -83,6 +87,7 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
         
         navigationController?.pushViewController(detailedNoteViewController, animated: true)
     }
+    
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true

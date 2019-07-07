@@ -31,8 +31,9 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        datePicker.minimumDate = Date()
+        titleField.delegate = self
         
+        datePicker.minimumDate = Date()
 
         imageSelectButton.layer.cornerRadius = 6.0
         imageSelectButton.layer.borderWidth = 0.5
@@ -88,13 +89,11 @@ class AddNoteViewController: UIViewController, UIImagePickerControllerDelegate, 
     
 }
 
-
-
 extension AddNoteViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
-        return newLength <= 10
+        return newLength < 20
     }
 }

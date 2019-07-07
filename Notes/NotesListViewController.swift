@@ -9,14 +9,43 @@
 import UIKit
 
 
-class NotesListViewController: UITableViewController, AddNoteViewControllerDelegate, DetailedViewControllerDelegate {
+class NotesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource,  AddNoteViewControllerDelegate, DetailedViewControllerDelegate {
     
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return notes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let note = notes[indexPath.row]
+        var reuseIdentifier = "NoteCollectionViewCell"
+        
+        if note.image != nil {
+            reuseIdentifier += "+Image"
+        }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? NoteCollectionViewCell else { return UICollectionViewCell() }
+        cell.setup(with: note)
+        
+        return cell
+    }
+    
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var editBarItem: UIBarButtonItem!
+    
     
     internal var notes = [Note]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 200.0
         title = "Notes"
@@ -38,19 +67,19 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
     // textshouldchangecharactersinrange -> bool
     
     @IBAction func editAction(_ sender: UIBarButtonItem) {
-        isEditing = !isEditing
-        if isEditing {
-            sender.title = "Done"
+        tableView.isEditing = !tableView.isEditing
+        if tableView.isEditing {
+            sender.title = "Save"
         } else {
             sender.title = "Edit"
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let note = notes[indexPath.row]
         var reuseIdentifier = "NoteTableViewCell"
         if note.image != nil {
@@ -78,7 +107,7 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
     }
     
     
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         print("Tapped accessory button")
         guard let detailedNoteViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailedViewController") as? DetailedViewController else { return }
         
@@ -89,26 +118,26 @@ class NotesListViewController: UITableViewController, AddNoteViewControllerDeleg
     }
     
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             notes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let movedNote = notes.remove(at: sourceIndexPath.row)
         notes.insert(movedNote, at: destinationIndexPath.row)
         tableView.reloadData()

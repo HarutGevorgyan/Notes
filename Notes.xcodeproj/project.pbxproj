@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		25402FAA22CBAFF200874F17 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25402FA922CBAFF200874F17 /* DetailedViewController.swift */; };
+		258D238E22D211ED00C78CB1 /* NoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258D238D22D211ED00C78CB1 /* NoteCollectionViewCell.swift */; };
 		25CA3CAD22C8074500C3F8C3 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CA3CAC22C8074500C3F8C3 /* Note.swift */; };
 		E0660C3622BF7B280054FFC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0660C3522BF7B280054FFC2 /* AppDelegate.swift */; };
 		E0660C3B22BF7B280054FFC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0660C3922BF7B280054FFC2 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		25402FA922CBAFF200874F17 /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		258D238D22D211ED00C78CB1 /* NoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		25CA3CAC22C8074500C3F8C3 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		E0660C3222BF7B280054FFC2 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0660C3522BF7B280054FFC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,13 +69,14 @@
 				E0660C3522BF7B280054FFC2 /* AppDelegate.swift */,
 				E0660C4722BF7B6B0054FFC2 /* LoginViewController.swift */,
 				25CA3CAC22C8074500C3F8C3 /* Note.swift */,
+				258D238D22D211ED00C78CB1 /* NoteCollectionViewCell.swift */,
 				E0660C4D22BF7D490054FFC2 /* NoteTableViewCell.swift */,
-				E0660C4B22BF7BA30054FFC2 /* AddNoteViewController.swift */,
 				E0660C4922BF7B8F0054FFC2 /* NotesListViewController.swift */,
-				E0660C3E22BF7B290054FFC2 /* LaunchScreen.storyboard */,
+				E0660C4B22BF7BA30054FFC2 /* AddNoteViewController.swift */,
 				25402FA922CBAFF200874F17 /* DetailedViewController.swift */,
 				E0660C3922BF7B280054FFC2 /* Main.storyboard */,
 				E0660C3C22BF7B290054FFC2 /* Assets.xcassets */,
+				E0660C3E22BF7B290054FFC2 /* LaunchScreen.storyboard */,
 				E0660C4122BF7B290054FFC2 /* Info.plist */,
 			);
 			path = Notes;
@@ -154,6 +157,7 @@
 				E0660C4822BF7B6B0054FFC2 /* LoginViewController.swift in Sources */,
 				25402FAA22CBAFF200874F17 /* DetailedViewController.swift in Sources */,
 				E0660C4A22BF7B8F0054FFC2 /* NotesListViewController.swift in Sources */,
+				258D238E22D211ED00C78CB1 /* NoteCollectionViewCell.swift in Sources */,
 				E0660C4E22BF7D490054FFC2 /* NoteTableViewCell.swift in Sources */,
 				E0660C3622BF7B280054FFC2 /* AppDelegate.swift in Sources */,
 				25CA3CAD22C8074500C3F8C3 /* Note.swift in Sources */,

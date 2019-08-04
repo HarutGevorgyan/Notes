@@ -8,9 +8,7 @@
 
 import UIKit
 
-
-class NotesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource,  AddNoteViewControllerDelegate, DetailedViewControllerDelegate {
-    
+extension NotesListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return notes.count
@@ -20,21 +18,42 @@ class NotesListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let note = notes[indexPath.row]
         var reuseIdentifier = "NoteCollectionViewCell"
+        if note.image != nil { reuseIdentifier += "+Image" }
         
-        if note.image != nil {
-            reuseIdentifier += "+Image"
-        }
+        
+        print(reuseIdentifier)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? NoteCollectionViewCell else { return UICollectionViewCell() }
-        cell.setup(with: note)
-        
+//        cell.setup(with: note)
+        cell.noteImageView?.image = note.image
         return cell
     }
-    
+}
+
+
+
+class NotesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddNoteViewControllerDelegate, DetailedViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var editBarItem: UIBarButtonItem!
     
+    
+    @IBAction func notesDisplayingTypeChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 1:
+            tableView.isHidden = true
+            collectionView.isHidden = false
+            collectionView.reloadData()
+        case 2:
+            tableView.isHidden = true
+            collectionView.isHidden = false
+            collectionView.reloadData()
+        default:
+            tableView.isHidden = false
+            collectionView.isHidden = true
+            tableView.reloadData()
+        }
+    }
     
     internal var notes = [Note]()
     
@@ -63,8 +82,6 @@ class NotesListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    
-    // textshouldchangecharactersinrange -> bool
     
     @IBAction func editAction(_ sender: UIBarButtonItem) {
         tableView.isEditing = !tableView.isEditing
@@ -97,6 +114,7 @@ class NotesListViewController: UIViewController, UITableViewDelegate, UITableVie
     func noteCreated(note: Note) {
         notes.append(note)
         tableView.reloadData()
+        collectionView.reloadData()
     }
     
     // implementation of DetailedViewControllerDelegate
@@ -142,4 +160,5 @@ class NotesListViewController: UIViewController, UITableViewDelegate, UITableVie
         notes.insert(movedNote, at: destinationIndexPath.row)
         tableView.reloadData()
     }
+    
 }

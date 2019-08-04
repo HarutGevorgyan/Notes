@@ -3,7 +3,7 @@
 //  Notes
 //
 //  Created by Harut on 07/07/2019.
-//  Copyright © 2019 Arhur Hakobyan. All rights reserved.
+//  Copyright © 2019 Harutyun Gevorgyan. All rights reserved.
 //
 
 import UIKit
@@ -11,14 +11,16 @@ import UIKit
 class NoteCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var noteImageView: UIImageView?
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var phoneNumberButton: UIButton!
+    @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var noteImageView: UIImageView?
     
     // TODO: use DateFormatter for dateLabel.text
     
     func setup(with note: Note) {
         titleLabel.text = note.title
-        dateLabel.text = note.date.description
+        phoneNumberButton.setTitle(note.phone, for: .normal)
+        emailButton.setTitle(note.email, for: .normal)
         if let noteImageView = self.noteImageView {
             noteImageView.image = note.image
         }

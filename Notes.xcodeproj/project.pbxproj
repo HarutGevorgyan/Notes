@@ -69,8 +69,8 @@
 				E0660C3522BF7B280054FFC2 /* AppDelegate.swift */,
 				E0660C4722BF7B6B0054FFC2 /* LoginViewController.swift */,
 				25CA3CAC22C8074500C3F8C3 /* Note.swift */,
-				258D238D22D211ED00C78CB1 /* NoteCollectionViewCell.swift */,
 				E0660C4D22BF7D490054FFC2 /* NoteTableViewCell.swift */,
+				258D238D22D211ED00C78CB1 /* NoteCollectionViewCell.swift */,
 				E0660C4922BF7B8F0054FFC2 /* NotesListViewController.swift */,
 				E0660C4B22BF7BA30054FFC2 /* AddNoteViewController.swift */,
 				25402FA922CBAFF200874F17 /* DetailedViewController.swift */,
@@ -307,6 +307,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7C4VH89VKJ;
 				INFOPLIST_FILE = Notes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -324,6 +325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7C4VH89VKJ;
 				INFOPLIST_FILE = Notes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
